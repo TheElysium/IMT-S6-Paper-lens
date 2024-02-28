@@ -5,6 +5,12 @@ const size = 50;
 let isMouseDown = false;
 const appContainer = document.getElementById('app');
 
+let isPopup = false;
+
+if (window.opener && window.opener !== window) {
+    isPopup = true;
+}
+
 let oldX = window.screenX,
     oldY = window.screenY;
 
@@ -28,7 +34,7 @@ function updateScan() {
 
     console.log(coordinates);
     toXray.style.left = `${coordinates.x}px`;
-    toXray.style.top = `${coordinates.y}px`;
+    toXray.style.top = `${coordinates.y + (isPopup ? 12 : 0)}px`;
 
     appContainer.style.setProperty('--x', `${-window.screenX}px`);
     appContainer.style.setProperty('--y', `${-window.screenY}px`);

@@ -13,7 +13,7 @@ let oldX = window.screenX,
     oldY = window.screenY;
 
 let interval = setInterval(function(){
-    if(oldX != window.screenX || oldY != window.screenY){
+    if(oldX !== window.screenX || oldY !== window.screenY){
         localStorage.setItem('coordinates', JSON.stringify(getDivCoordinatesRelativeToScreen('body')));
     } else {
     }
@@ -25,3 +25,9 @@ let interval = setInterval(function(){
 window.addEventListener('resize', () => {
     localStorage.setItem('coordinates', JSON.stringify(getDivCoordinatesRelativeToScreen('body')));
 });
+
+function handleOpenLensClick(){
+    window.open('scanner.html', "_blank", "popup width=400 height=400")
+}
+
+document.getElementById('open-lens').addEventListener('click', handleOpenLensClick);

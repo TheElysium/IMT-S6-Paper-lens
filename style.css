@@ -23,14 +23,39 @@ body {
   will-change: transform;
 }
 
-h1 {
+#explanations {
   margin: 0;
   padding: 0;
   position: absolute;
   left: 5%;
   top: 5%;
   color: white;
+  z-index: 3;
 }
+
+#explanations a {
+  color: white;
+}
+
+#open-lens {
+  background-color: rgba(141, 150, 176, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+#open-lens:hover {
+  background-color: #454d64;
+}
+
 
 .center {
   position: absolute;
@@ -130,7 +155,7 @@ h1 {
   left: 50%;
   transform: translateX(-50%);
   background-color: rgba(141, 150, 176, 0.5);
-  color: #2d3242;
+  color: white;
   padding: 5px;
   border-radius: 5px;
   font-size: 16px;
