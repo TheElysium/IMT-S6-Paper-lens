@@ -20,7 +20,7 @@ function getDivCoordinatesRelativeToScreen(divId) {
 }
 
 function handleOpenLensClick() {
-    window.open('scanner.html', "_blank", "popup width=400 height=400")
+    window.open('./scanner.html', "_blank", "popup width=400 height=400")
 }
 window.addEventListener('resize', () => {
     localStorage.setItem('coordinates', JSON.stringify(getDivCoordinatesRelativeToScreen('body')));
