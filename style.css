@@ -1,0 +1,128 @@
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  background-color: #2d3242;
+  overflow: hidden;
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  left: 5%;
+  top: 5%;
+  color: white;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+#body, #skeleton, #organs {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+#skeleton {
+  background-color: #2d3242;
+}
+
+@keyframes beat {
+  0%, 100% {
+    transform: translate(15px, -80px) scale(0.06);
+  }
+  50% {
+    transform: translate(15px, -80px) scale(0.08);
+  }
+}
+
+#heart {
+  transform-origin: center;
+  transform: translate(15px, -80px) scale(0.06);
+  fill: red;
+  animation: beat 1s infinite ease-in-out;
+}
+
+.eye {
+  transform-origin: center center;
+  transform-box: fill-box;
+}
+
+.eyebrow{
+  transform-origin: center center;
+  transform-box: fill-box;
+}
+
+.scan {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  background-color: transparent;
+  border: 4px solid #b9b9b9;
+  --x: -100px;
+  --y: -100px;
+  transform: translate(var(--x), var(--y));
+  will-change: transform;
+}
+
+#organs {
+  visibility: hidden;
+}
+
+#selector {
+  width: 100%;
+  height: 30%;
+  background-color: #b9b9b9;
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 4px;
+}
+
+#skeletonSelector, #organsSelector {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+}
+
+#organsSelector svg, #skeletonSelector svg {
+  width: 100%;
+  height: 100%;
+  fill: white;
+  cursor: pointer;
+}
+
+#skeletonSelector svg {
+  width: 70%;
+}
+
+#skeletonSelector:hover, #organsSelector:hover {
+  background-color: #d7d7d7;
+}
+
+#skeletonSelector:hover::after, #organsSelector:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #b9b9b9;
+  color: #2d3242;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 12px;
+  white-space: nowrap; /* Prevent the tooltip text from wrapping */
+}
