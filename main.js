@@ -20,6 +20,7 @@ function getDivCoordinatesRelativeToScreen(divId) {
 }
 
 function handleOpenLensClick() {
+    console.log("button clicked")
     window.open('./scanner.html', "_blank", "popup width=400 height=400")
 }
 window.addEventListener('resize', () => {
