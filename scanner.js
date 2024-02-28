@@ -1,21 +1,15 @@
-const scan = document.querySelector('.scan');
 let toXray = document.querySelector('#skeleton');
-let { x: toXrayX, y: toXrayY } = toXray.getBoundingClientRect();
-const size = 50;
-let isMouseDown = false;
 const appContainer = document.getElementById('app');
 
 let isPopup = false;
-
 if (window.opener && window.opener !== window) {
     isPopup = true;
 }
 
 let oldX = window.screenX,
     oldY = window.screenY;
-
-let interval = setInterval(function(){
-    if(oldX != window.screenX || oldY != window.screenY){
+setInterval(function () {
+    if (oldX !== window.screenX || oldY !== window.screenY) {
         console.log('moved!');
         updateScan();
     } else {
@@ -38,9 +32,20 @@ function updateScan() {
 
     appContainer.style.setProperty('--x', `${-window.screenX}px`);
     appContainer.style.setProperty('--y', `${-window.screenY}px`);
-/*    appContainer.style.setProperty('--x', `0px`);
-    appContainer.style.setProperty('--y', `0px`);*/
 }
+
+function handleSelectorClick(selector) {
+    toXray.style.visibility = 'hidden';
+    toXray = document.querySelector(selector);
+    toXray.style.visibility = 'visible';
+    updateScan();
+}
+
+function init() {
+    console.log(window.screenX, window.screenY)
+    updateScan();
+}
+
 window.addEventListener('resize', () => {
     updateScan();
 });
@@ -50,18 +55,9 @@ window.addEventListener('storage', (event) => {
         updateScan();
     }
 });
-function handleSelectorClick(selector) {
-    toXray.style.visibility = 'hidden';
-    toXray = document.querySelector(selector);
-    toXray.style.visibility = 'visible';
-    updateScan();
-}
 document.querySelector('#skeletonSelector').addEventListener('click', () => handleSelectorClick('#skeleton'));
 document.querySelector('#organsSelector').addEventListener('click', () => handleSelectorClick('#organs'));
 
-function init() {
-    console.log(window.screenX, window.screenY)
-    updateScan();
-}
-
-window.addEventListener('load', () => {init()})
+window.addEventListener('load', () => {
+    init()
+})
