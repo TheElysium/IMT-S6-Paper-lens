@@ -5,10 +5,10 @@ const size = 50;
 let isMouseDown = false;
 const appContainer = document.getElementById('app');
 
-var oldX = window.screenX,
+let oldX = window.screenX,
     oldY = window.screenY;
 
-var interval = setInterval(function(){
+let interval = setInterval(function(){
     if(oldX != window.screenX || oldY != window.screenY){
         console.log('moved!');
         updateScan();
@@ -21,6 +21,14 @@ var interval = setInterval(function(){
 }, 1);
 
 function updateScan() {
+    const coordinates = JSON.parse(localStorage.getItem('coordinates'));
+
+    document.body.style.width = `${window.screen.width}px`;
+    document.body.style.height = `${window.screen.height}px`;
+    const skeleton = document.getElementById('skeleton');
+    console.log(coordinates);
+    skeleton.style.left = `${coordinates.x}px`;
+    skeleton.style.top = `${coordinates.y}px`;
 
     appContainer.style.setProperty('--x', `${-window.screenX}px`);
     appContainer.style.setProperty('--y', `${-window.screenY}px`);
@@ -29,6 +37,12 @@ function updateScan() {
 }
 window.addEventListener('resize', () => {
     updateScan();
+});
+
+window.addEventListener('storage', (event) => {
+    if (event.key === 'coordinates') {
+        updateScan();
+    }
 });
 
 function handleSelectorClick(selector) {
@@ -43,15 +57,7 @@ document.querySelector('#organsSelector').addEventListener('click', () => handle
 */
 
 function init() {
-    const coordinates = JSON.parse(localStorage.getItem('coordinates'));
-
-    document.body.style.width = `${window.screen.width}px`;
-    document.body.style.height = `${window.screen.height}px`;
-    const skeleton = document.getElementById('skeleton');
-    console.log(coordinates);
-    skeleton.style.left = `${coordinates.x}px`;
-    skeleton.style.top = `${coordinates.y}px`;
-
+    console.log(window.screenX, window.screenY)
     updateScan();
 }
 

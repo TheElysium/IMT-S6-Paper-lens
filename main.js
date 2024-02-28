@@ -1,18 +1,27 @@
-const appContainer = document.getElementById('app');
-appContainer.style.setProperty('--x', `0px`);
-appContainer.style.setProperty('--y', `0px`);
-
-
-// Usage
 function getDivCoordinatesRelativeToScreen(divId) {
     const div = document.getElementById(divId);
     const rect = div.getBoundingClientRect();
+    console.log(window.screenX, window.screenY)
     return {
         x: rect.left + window.screenX,
         y: rect.top + window.screenY
     };
 }
-
-console.log(getDivCoordinatesRelativeToScreen('body'));
 localStorage.setItem('coordinates', JSON.stringify(getDivCoordinatesRelativeToScreen('body')));
 
+let oldX = window.screenX,
+    oldY = window.screenY;
+
+let interval = setInterval(function(){
+    if(oldX != window.screenX || oldY != window.screenY){
+        localStorage.setItem('coordinates', JSON.stringify(getDivCoordinatesRelativeToScreen('body')));
+    } else {
+    }
+
+    oldX = window.screenX;
+    oldY = window.screenY;
+}, 1);
+
+window.addEventListener('resize', () => {
+    localStorage.setItem('coordinates', JSON.stringify(getDivCoordinatesRelativeToScreen('body')));
+});
